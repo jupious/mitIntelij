@@ -24,10 +24,12 @@ public class QuizController {
         return "quiz/quiz3";
     }
 
-    @GetMapping("/quiz/layout")
+    @GetMapping({"/quiz/layout","/quiz/layout2"})
     public void layout(){
 
     }
+    @GetMapping("/quiz/basic")
+    public void basic(){}
 
 
 }

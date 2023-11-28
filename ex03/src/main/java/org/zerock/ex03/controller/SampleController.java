@@ -91,7 +91,6 @@ public class SampleController {
     }
 
     @GetMapping({"/exLayout1","/exLayout2","/LayoutTest"})
-
     public void exLayout1(){
         log.info("exLayout..");
     }
