@@ -1,0 +1,14 @@
+1. JPA(구현체)는 Java로 SQL없이 DB를 사용하기 위한 방법
+2. 스프링부트에서 Hibernate를 편하게 사용할수 있도록 Spring Data JPA 사용
+3. 실제사용시 테이블(저장할 엔티티클래스)는 @Entity 어노테이션을 통해 지정가능
+4. 기본적인 CRUD 엔티티클래스 작업은 스프링에서 제공하는 JpaRepository를 상속받은 인터페이스를 통해서 사용(save()-insert,update findById()-select deleteById()-delete
+5. 페이지 처리는 Pageable 객체를 이용해서 작업(메소드 findAll)\
+6. 정렬은 Sort 객체를 이용해서 작업
+7. 여러 조건을 줘서 처리할때
+    7-1. 메소드쿼리를 이용해서 작업가능
+    7-2. JPQL을 이용해서 작업(객체지향 쿼리- 유사SQL, DB독립적으로 사용가능)
+        7-2-1. select문을 제외하고는 @Modifying, @Transactional 어노테이션 필요
+               (@Transactional 어노테이션은 테스트코드에만 붙여도 가능 단, 테스트코드에만 있을경우 테스트 실행후 롤백됨, @Commit 어노테이션으로 롤백을 방지할수있음)
+        7-2-2. JPQL은 Object로 쿼리 실행 결과를 반환할 수 있음
+
+    7-3. 네이티브쿼리를 이용해서 작업(실제 쿼리를 넣어서 사용)

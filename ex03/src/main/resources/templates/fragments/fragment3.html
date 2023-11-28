@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="target(first,second)">
+<head>
+    <meta charset="UTF-8">
+    <title>레이아웃</title>
+    <style>
+        .c1{ background-color: red; }
+        .c2{  background-color: blue;}
+
+    </style>
+</head>
+<body>
+aaa
+
+
+<div class="c1">
+    <th:block th:replace="${first}"></th:block>
+</div>
+
+<div class="c2">
+<th:block th:replace="${second}"></th:block>
+</div>
+</th:block>
+</body>
+</html>

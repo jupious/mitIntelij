@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>exl1</title>
+</head>
+<body>
+<th:block th:replace="~{/fragments/fragment2}"></th:block>
+전체를 불러오면 html안의 모든걸 가져오는듯
+<hr/>
+<h1>첫번째</h1>
+::이름을 통해 fragment name으로 접근가능
+<div th:replace="~{/fragments/fragment1::part1}"></div>
+<h1 th:insert="~{/fragments/fragment1::part2}">두번째</h1>
+<div></div>
+<h1><div><h1><div><h1>이거 되냐?</h1></div></h1></div></h1>
+<h1>세번째</h1>
+<th:block th:insert="~{/fragments/fragment1::part3}"></th:block>
+</body>
+</html>

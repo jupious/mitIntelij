@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>ex2</title>
+</head>
+<body>
+<h1 th:text="${'Hello World'}"></h1>
+보내온 내용 확인<br/>
+<!--[[${DTO}]]-->
+타임리프 인라인표기법 &#91;&#91; &#93;&#93;
+<!--/*
+<span th:each="data : ${list}">
+    [[${data}]] <br/>
+</span>
+
+<span th:each="data2 : ${list2}">
+    [[${data2}]] <br/>
+</span>
+*/-->
+타임리프 each에서 두번째 객체로 상태를 받아올수있음<br/>
+ex) -{index = 0, count = 1, size = 20, current = SampleDTO(sno=1, first=First 1, last=Last 1, regTime=2023-11-27T14:03:51.408)}<br/>
+index - 0부터 시작 순번<br/>
+count - 1부터 시작 순번<br/>
+even - 짝수(count기준 짝수여부)<br/>
+odd - 홀수(count기준 홀수여부)<br/>
+size - 전체크기<br/>
+<table border="1">
+    <tr>
+        <th>sno</th>
+        <th>first</th>
+        <th>last</th>
+        <th>regTime</th>
+        <th>status</th>
+    </tr>
+    <tr th:each="dto,status : ${list}" th:class="${dto.sno%5==0} ? 'target' ">
+        <td th:text="${dto.sno}"></td>
+        <td th:text="${dto.first}"></td>
+        <td th:text="${dto.last}"></td>
+        <td th:text="${#temporals.format(dto.regTime, 'MM월dd일 HH:mm:ss.SSS ')}"></td>
+        <td th:text="${status.index}"></td>
+    </tr>
+</table>
+
+<h1 th:if="${DTO.sno==1}" >참이면 나옴</h1>
+<h1 th:unless="${DTO.sno==1}">unless~</h1>
+삼항연산자도 가능
+<h1 th:text="${DTO.sno==1} ? ${DTO.first} : ${DTO.last}"></h1>
+<hr/>
+<h1 th:if="${DTO.sno==1}" >참이면 나옴</h1>
+<h1 th:text="${DTO.sno==1}?${'참이면 나옴'}"></h1>
+위에 두줄은 같은의미
+
+
+<table border="1">
+    <tr>
+        <th>sno</th>
+        <th>first</th>
+        <th>last</th>
+        <th>regTime</th>
+        <th>count</th>
+    </tr>
+    <tr th:if="${status.odd}" th:each="dto,status : ${list}">
+        <td th:text="${dto.sno}"></td>
+        <td th:text="${dto.first}"></td>
+        <td th:text="${dto.last}"></td>
+        <td th:text="${#temporals.format(dto.regTime, 'MM월dd일 HH:mm:ss.SSS ')}"></td>
+        <td th:text="${status.count}"></td>
+    </tr>
+</table>
+<hr/>
+유용한 타임리프의 인라인 속성 (데이터를 상황에 맞게 처리함)<br/>
+숫자는 숫자로, 문자는 문자로, 객체는 자바스크립트객체로(JSON)
+
+<script th:inline="javascript">
+    var a = [[${DTO.sno}]]  //a = 1
+    var b = [[${DTO.first}]]    //b = "First"
+    var c = [[${list}]]     //c = ..너무길어
+</script>
+
+<hr/>
+타임리프를 사용해야하는데 마땅한 태그가 없을때(블럭별로 Data 전달가능)<br/>
+
+<th:block th:each="vo : ${list}">
+    <th:block th:text="${vo.sno%5==0} ? ${vo}"></th:block><br/>
+</th:block>
+링크 처리할때 경로 자동처리(contextMenu값이 자동으로 처리(서버의 루트경로? 가 바꼈을때))<br/>
+<a th:href="@{/sample/ex1(sno=${DTO.sno},first=${DTO.first})}">ex1ㄱㄱ</a><br/>
+<a th:href="@{/sample/ex1/{first}(sno=${DTO.sno},first=${DTO.first})}">ex1ㄱㄱ</a>
+
+<hr/>
+날짜처리(String일 경우)
+<div th:text="${#temporals.format(DTO.regTime, 'MM월dd일 HH:mm:ss.SSS ')}"></div>
+
+Date타입일 경우
+<div th:text="${#dates.format(date, 'MM월dd일 HH:mm:ss.SSS ')}"></div>
+</body>
+</html>
