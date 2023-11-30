@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/layout/basic::setContent(~{::content})}">
+  <th:block th:fragment="content">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <table class ="table" style = "margin-bottom: 0pt; margin-top: 0pt; padding-top: 0pt; padding-bottom: 0pt;">
+              <thead>
+              <tr>
+                <th><h4 th:text="${postData.title}"></h4></th>
+
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td><small><span th:text="${postData.writer}"></span> |  <span th:text="${#temporals.format(postData.regDate, 'yyyy-MM-dd HH:mm')}"></span></small></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <textarea class="form-control" rows="20" style = " resize: none; background-color: white;" th:text="${postData.content}" readonly></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </th:block>
+</th:block>
+</html>

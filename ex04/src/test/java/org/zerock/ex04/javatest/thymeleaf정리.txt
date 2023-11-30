@@ -1,0 +1,31 @@
+0. 타임리프의 html 호환성을 위해서 태그의 속성으로 구현하도록 되어있음
+예외 <th:block>, [[]]
+0-1. 같은 태그 (ex- text, th:text가 같이 있다면 th:text)가 존재할때 치환됨
+
+1.일반 텍스트 변환(특수문자 변환)
+th:text="${}"
+
+2.일반 텍스트 변환(문자 그대로 변환)
+th:utext="${}"
+
+3.src주소
+th:src="${}"
+
+4.href 주소
+th:href="@{aaa.com(a=${a},b=${b},c='c')}" <-권장
+th:href="'aaa.com' + ?'a='+${a}+'&b='+${b}+'&c=c'"
+th:href="|aaa.com?a=${a}&b=${b}|"
+
+5.class
+<span class="aaa" th:class="${aaa}">aaa</span>
+
+7.조건(태그 활성화 여부 결정)
+th:if="${}"
+
+8.반복
+th:each="value:${list}"
+
+9.객체값 읽을때(보낸 이름이 aaa고 aa,bb,cc필드를 가졌을때)
+${aaa.aa} - (내부적으로 aaa.getAa()호출)
+${aaa['aa']}
+${aaa.getAa()}

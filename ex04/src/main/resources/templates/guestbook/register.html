@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/layout/basic::setContent(~{::content})}">
+    <th:block th:fragment="content">
+        <h1 class="mt-4">게시글 등록</h1>
+        <hr/>
+        <form action="/guestbook/register" method="post">
+        <div class="mb-3">
+            <label for="titleInput" class="form-label">제목</label>
+            <input type="text" name="title" class="form-control" id="titleInput">
+        </div>
+        <div class="mb-3">
+            <label for="writerInput" class="form-label">작성자</label>
+            <input type="text" name="writer" class="form-control" id="writerInput">
+        </div>
+        <div class="mb-3">
+            <label for="contentInput" class="form-label">내용</label>
+            <textarea class="form-control" name="content" id="contentInput" rows="20" style="resize: none;"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">등록</button>
+        </form>
+    </th:block>
+</th:block>
+</html>

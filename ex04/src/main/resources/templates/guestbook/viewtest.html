@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div th:text="${str1}"></div>
+    <div th:utext="${str1}"></div>
+    <img src="dog.jpg"></img>
+    <img src="[[${dog.jpg}]]"></img>
+    <img th:src="${str2}"></img>
+    <a href="dog.jpg" th:href="${str2}">링크주소 테스트</a>
+
+    <div class="default" th:class="${str3}" th:classappend="${str4}">클래스 속성테스트</div>
+    <div th:text="${aaa.aa}+${aaa['bb']}+${aaa.getCc()}">aaaa</div>
+    <div th:utext="'맵데이터는<br/> '+${aaa.dd.lastname}+'<br/>'+${aaa.dd['firstname']}"></div>
+    <div th:each="data : ${aaa.dd}">[[${data.key}]]</div>
+    <div th:each="data : ${aaa.dd}">키 : [[${data.key}]] 값 : [[${data.value}]]</div>
+
+    <th:block th:with="aaa='안녕',bbb='되는구만'">
+        [[${aaa}]]
+        [[${bbb}]]
+    </th:block>
+</body>
+</html>
