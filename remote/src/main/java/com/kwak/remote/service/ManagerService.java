@@ -9,10 +9,13 @@ import java.util.List;
 public interface ManagerService {
 
     //등록
-    void insert(ManagerDTO managerDTO);
+    boolean insert(ManagerDTO managerDTO);
 
     //확인
-    List<ManagerDTO> getData();
+    List<ManagerDTO> getDataList();
+
+    //중복확인용
+    boolean dupCheck(Long pno);
     default Manager dtoToEntity(ManagerDTO managerDTO){
         //java8부터 default를 통해 인터페이스에서 직접 구현이 가능함
         return Manager.builder()

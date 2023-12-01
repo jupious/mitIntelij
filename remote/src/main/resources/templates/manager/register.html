@@ -1,18 +1,66 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>등록</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" 
+    integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" 
+    crossorigin="anonymous"></script>
 </head>
 <body>
 <h3>신규등록</h3><br/>
 <form action="/manager/register" method="post">
-    이름: <input type="text" name="name" /><br/>
-    부서: <input type="text" name="part"><br/>
+    이름: <input type="text" name="name" required /><br/>
+    부서: <input type="text" name="part" required /><br/>
     전화번호: <input type="text" name="tel"><br/>
-    사원번호: <input type="number" name="pno"><br/>
-    <input type="submit" value="가입">
+    사원번호: <input type="number" id="pno" name="pno" required /><br/>
+    <input type="text" id="dup" readonly style="border: none;" /> <br/>
+    <input type="submit" id="reg" value="가입">
 </form>
 <a href="/manager/main">돌아가기</a>
+
+
+
+<script th:inline="javascript">
+    var isDuplicated = false;
+    var fail=[[${fail}]];
+    if(fail){
+        alert("중복된 사원입니다.");
+    }
+    
+    $(function(){
+        
+        $('#pno').on("propertychange change paste input",function(){
+            
+            var pno = $(this).val();
+            if(pno != ""){
+                $.ajax({
+                    type:"post",
+                    url:"/rest/dupcheck/"+pno,
+                    success:function(result){
+                       
+                        if(result){
+                            $('#dup').val('중복된 사원번호입니다.').change();
+                            isDuplicated=true;
+                        }else{
+                            $('#dup').val('입력 가능한 사원번호 입니다.').change();
+                            isDuplicated=false;
+                        }
+                    }
+                })
+            }
+           
+        // $('#reg').off("click").on("click",function(e){
+        //     e.preventDefault;
+        //     console.log("중복임?",isDuplicated);
+        //     if(!isDuplicated){
+        //         $(this).submit();
+        //     }else{
+        //         alert("중복된 사원번호라니깐...");
+        //     }
+        // })
+        })
+    })
+</script>
 </body>
 </html>

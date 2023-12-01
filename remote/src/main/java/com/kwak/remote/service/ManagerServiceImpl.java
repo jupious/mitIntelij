@@ -15,12 +15,17 @@ public class ManagerServiceImpl implements ManagerService{
 
     private ManagerRepository managerRepository;
     @Override
-    public void insert(ManagerDTO managerDTO) {
-        managerRepository.save(this.dtoToEntity(managerDTO));
+    public boolean insert(ManagerDTO managerDTO) {
+        boolean flag = false;
+        if(managerRepository.findById(managerDTO.getPno()).isEmpty()){
+            managerRepository.save(this.dtoToEntity(managerDTO));
+            flag = true;
+        }
+        return flag;
     }
 
     @Override
-    public List<ManagerDTO> getData() {
+    public List<ManagerDTO> getDataList() {
         List<Manager> result =  managerRepository.findAll();
         List<ManagerDTO> trans = new ArrayList<>();
         result.forEach(x ->{
@@ -28,4 +33,12 @@ public class ManagerServiceImpl implements ManagerService{
         });
         return trans;
     }
+
+    @Override
+    public boolean dupCheck(Long pno) {
+        //중복되면(존재하면)True, 아니면 False
+        return managerRepository.findById(pno).isPresent();
+    }
+
+
 }
